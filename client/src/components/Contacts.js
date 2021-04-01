@@ -1,15 +1,16 @@
 import React from "react";
 import {useContacts} from "../contexts/ContactsProvider";
-import {ListGroup} from "react-bootstrap";
+import {Button, ListGroup} from "react-bootstrap";
 
 export default function Contacts() {
-    const {contacts} = useContacts()
+    const {contacts, deleteContact} = useContacts()
 
     return (
         <ListGroup variant="flush">
             {contacts.map(contact => (
                 <ListGroup.Item key={contact.id}>
                     {contact.name}
+                    <Button onClick={() => deleteContact(contact.id)} style={{float: 'right'}}>X</Button>
                 </ListGroup.Item>
             ))}
         </ListGroup>

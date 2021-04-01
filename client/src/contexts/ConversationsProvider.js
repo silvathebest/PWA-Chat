@@ -21,6 +21,11 @@ export function ConversationsProvider({id, children}) {
         setConversations(prevConversations => [...prevConversations, {recipients, messages: []}])
     }
 
+    const deleteConversation = (conversation) => {
+        setConversations(prevConversations =>
+            prevConversations.filter((item, index) => index !== conversation))
+    }
+
     const addMessageToConversation = useCallback(({recipients, text, sender}) => {
         setConversations(prevConversations => {
             let madeChange = false
@@ -77,7 +82,8 @@ export function ConversationsProvider({id, children}) {
         selectedConversation: formattedConversations[selectedConversationIndex],
         sendMessage,
         selectConversationIndex: setSelectedConversationIndex,
-        createConversation
+        createConversation,
+        deleteConversation
     }
 
     return (
