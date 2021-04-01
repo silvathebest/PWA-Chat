@@ -1,27 +1,33 @@
 import React, {useCallback, useState} from "react";
 import {Button, Form, InputGroup} from "react-bootstrap";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faPaperPlane} from "@fortawesome/free-solid-svg-icons";
 import {useConversations} from "../contexts/ConversationsProvider";
 
 export default function OpenConversation() {
     const [text, setText] = useState('')
+
     const setRef = useCallback(node => {
         if (!node) return
         node.scrollIntoView({smooth: true})
     }, [])
+
     const {sendMessage, selectedConversation} = useConversations()
 
 
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        sendMessage(selectedConversation.recipients.map(r => r.id), text)
+        if (text === '') return
+
+        sendMessage(selectedConversation.recipients.map(r => r.id), text.trim())
         setText('')
     }
 
     return (
         <div className="d-flex flex-column flex-grow-1">
             <div className="flex-grow-1 overflow-auto">
-                <div className="d-flex flex-column align-items-start justify-content-end px-3">
+                <div className="d-flex flex-column align-items-start justify-content-end px-3 mt-3">
                     {selectedConversation.messages.map((message, index) => (
                         <div
                             ref={selectedConversation.messages.length - 1 === index ? setRef : null}
@@ -45,13 +51,15 @@ export default function OpenConversation() {
                     <InputGroup>
                         <Form.Control
                             as="textarea"
-                            required value={text}
+                            required
+                            value={text}
                             onChange={e => setText(e.target.value)}
-                            style={{height: '75px', resize: 'none'}}
+                            style={{height: '50px', resize: 'none'}}
+                            placeholder={'Type something...'}
                             onKeyPress={(e) => e.key === 'Enter' ? handleSubmit(e) : null}
                         />
                         <InputGroup.Append>
-                            <Button type="submit">Send</Button>
+                            <Button type="submit"><FontAwesomeIcon icon={faPaperPlane}/></Button>
                         </InputGroup.Append>
                     </InputGroup>
                 </Form.Group>

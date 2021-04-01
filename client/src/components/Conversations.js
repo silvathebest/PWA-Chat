@@ -1,6 +1,7 @@
 import React from "react";
-import {Button, ListGroup} from "react-bootstrap";
+import {ListGroup} from "react-bootstrap";
 import {useConversations} from "../contexts/ConversationsProvider";
+import DeleteItemButton from "./DeleteItemButton";
 
 export default function Conversations() {
     const {conversations, selectConversationIndex, deleteConversation} = useConversations()
@@ -15,10 +16,7 @@ export default function Conversations() {
                     active={conversation.selected}
                 >
                     {conversation.recipients.map(r => r.name).join(', ')}
-                    <Button onClick={() => deleteConversation(index)}
-                            style={{float: 'right'}}>
-                        X
-                    </Button>
+                    <DeleteItemButton deleteFunc={deleteConversation} funcProps={index}/>
                 </ListGroup.Item>
             ))}
         </ListGroup>

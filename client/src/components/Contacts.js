@@ -1,6 +1,7 @@
 import React from "react";
 import {useContacts} from "../contexts/ContactsProvider";
-import {Button, ListGroup} from "react-bootstrap";
+import {ListGroup} from "react-bootstrap";
+import DeleteItemButton from "./DeleteItemButton";
 
 export default function Contacts() {
     const {contacts, deleteContact} = useContacts()
@@ -10,7 +11,7 @@ export default function Contacts() {
             {contacts.map(contact => (
                 <ListGroup.Item key={contact.id}>
                     {contact.name}
-                    <Button onClick={() => deleteContact(contact.id)} style={{float: 'right'}}>X</Button>
+                    <DeleteItemButton deleteFunc={deleteContact} funcProps={contact.id}/>
                 </ListGroup.Item>
             ))}
         </ListGroup>

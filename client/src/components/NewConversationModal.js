@@ -12,6 +12,8 @@ export default function NewConversationModal({modalClose}) {
     const handleSubmit = (e) => {
         e.preventDefault()
 
+        if (selectedContactIds.length === 0) return
+
         createConversation(selectedContactIds)
         modalClose()
     }
