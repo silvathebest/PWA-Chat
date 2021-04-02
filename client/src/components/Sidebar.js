@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {Tab, Nav, Button, Modal} from "react-bootstrap";
+import "../styles/media.css"
 import Conversations from "./Conversations";
 import Contacts from "./Contacts";
 import NewConversationModal from "./NewConversationModal";
@@ -19,7 +20,7 @@ export default function Sidebar({id}) {
     }
 
     return (
-        <div style={{width: '250px'}} className='d-flex flex-column'>
+        <div style={{width: '250px'}} className='d-flex flex-column sidebar'>
             <Tab.Container activeKey={activeKey} onSelect={setActiveKey}>
                 <Nav variant="tabs" className="justify-content-center">
                     <Nav.Item>

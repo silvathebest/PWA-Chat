@@ -9,7 +9,7 @@ export default function Contacts() {
     return (
         <ListGroup variant="flush">
             {contacts.map(contact => (
-                <ListGroup.Item key={contact.id}>
+                <ListGroup.Item style={{overflow: "hidden"}} key={contact.id}>
                     {contact.name}
                     <DeleteItemButton deleteFunc={deleteContact} funcProps={contact.id}/>
                 </ListGroup.Item>
