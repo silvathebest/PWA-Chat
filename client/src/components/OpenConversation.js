@@ -3,6 +3,7 @@ import {Button, Form, InputGroup} from "react-bootstrap";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faPaperPlane} from "@fortawesome/free-solid-svg-icons";
 import {useConversations} from "../contexts/ConversationsProvider";
+const {decryption} = require("../encryption/encrypt")
 
 export default function OpenConversation() {
     const [text, setText] = useState('')
@@ -37,7 +38,7 @@ export default function OpenConversation() {
                         >
                             <div
                                 className={`rounded px-2 py-1 ${message.fromMe ? 'bg-primary text-white' : 'border'}`}>
-                                {message.text}
+                                {message.fromMe ? message.text : decryption(message.text, "aboba")}
                             </div>
                             <div className={`text-muted small ${message.fromMe ? 'text-right' : ''}`}>
                                 {message.fromMe ? 'You' : message.senderName}

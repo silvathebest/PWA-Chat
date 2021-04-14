@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon server.js",
+    "start": "nodemon server.js",
     "client": "npm run start --prefix client",
+    "client:install": "npm install --prefix client",
+    "client:build": "npm run build --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "keywords": [],
@@ -14,9 +15,11 @@
   "license": "ISC",
   "dependencies": {
     "concurrently": "^6.0.2",
+    "express": "^4.17.1",
     "socket.io": "^4.0.0"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "nodemon": "^2.0.7"
   }
 }
